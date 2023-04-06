@@ -1,6 +1,8 @@
 # LiquidSense++++
 A free mixin-based injection hacked-client for Minecraft using Minecraft Forge.
 
+LiquidSense++++ build on LiquidBoucne
+
 [CH 中文版MD](https://github.com/LTGVE/LiquidSensePlusPlusPlusPlus/blob/main/README.CN.md)
 
 ## License
