@@ -53,7 +53,7 @@ LiquidSense++++使用Gradle构造，因此请确保其安装正确。说明可�
 
 -对于IntelliJ:`gradlew--debug setupDevWorkspace idea genIntellijRuns build`
 
--对于Eclipse：`gradlew--调试setupDevWorkspace Eclipse build`
+-对于Eclipse：`gradlew--debug setupDevWorkspace Eclipse build`
 
 4.在IDE中将文件夹作为Gradle项目打开。
 
