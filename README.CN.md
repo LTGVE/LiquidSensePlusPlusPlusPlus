@@ -1,10 +1,10 @@
-#LiquidSense++++
+# LiquidSense++++
 
 一个基于Minecraft Mixin 的 黑客客户端，在Minecraft Forge 版本的Minecraft 上使用。
 LiquidSense++++基于LiquidBounce来构造
 
 
-##许可证
+## 许可证
 
 本项目受GNU通用公共许可证v3.0]（License）的约束。这只适用于直接位于这个干净存储库中的源代码。在开发和编译过程中，可能会使用我们没有获得任何权利的额外源代码。此类代码不在GPL许可范围内。
 
@@ -41,7 +41,7 @@ LiquidSense++++基于LiquidBounce来构造
 
 
 
-##设置工作区
+## 设置工作区
 
 LiquidSense++++使用Gradle构造，因此请确保其安装正确。说明可在【Gradle的网站】上找到(https://gradle.org/install/).
 
@@ -61,15 +61,15 @@ LiquidSense++++使用Gradle构造，因此请确保其安装正确。说明可�
 
 
 
-##其他库
+## 其他库
 
-###混合物
+### 混合物
 
 Mixin可以用于在加载类之前在运行时修改类。LiquidSense++++正在使用它将代码注入Minecraft客户端。这样，我们就不必运送Mojang受版权保护的代码。如果您想了解更多信息，请查看其[文档](https://docs.spongepowered.org/5.1.0/en/plugin/internals/mixins.html).
 
 
 
-##贡献
+## 贡献
 
 
 
