@@ -63,7 +63,7 @@ LiquidSense++++使用Gradle构造，因此请确保其安装正确。说明可�
 
 ## 其他库
 
-### 混合物
+### Mixin
 
 Mixin可以用于在加载类之前在运行时修改类。LiquidSense++++正在使用它将代码注入Minecraft客户端。这样，我们就不必运送Mojang受版权保护的代码。如果您想了解更多信息，请查看其[文档](https://docs.spongepowered.org/5.1.0/en/plugin/internals/mixins.html).
 
