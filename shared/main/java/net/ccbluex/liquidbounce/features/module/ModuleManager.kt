@@ -193,7 +193,8 @@ class ModuleManager : Listenable {
             HytGetName::class.java,
             NoLagBack::class.java,
             KeepArmor::class.java,
-            AutoPlay::class.java
+            AutoPlay::class.java,
+            CancelC03::class.java
 
         )
 
