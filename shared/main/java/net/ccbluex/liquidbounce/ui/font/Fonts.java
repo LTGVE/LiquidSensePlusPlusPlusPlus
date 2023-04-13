@@ -25,11 +25,11 @@ public class Fonts extends MinecraftInstance {
     @FontDetails(fontName = "Minecraft Font")
     public static final IFontRenderer minecraftFont = mc.getFontRendererObj();
     private static final HashMap<FontInfo, IFontRenderer> CUSTOM_FONT_RENDERERS = new HashMap<>();
-    @FontDetails(fontName = "Roboto Medium", fontSize = 35)
+    @FontDetails(fontName = "MiSans-1", fontSize = 35)
     public static IFontRenderer font35;
-    @FontDetails(fontName = "Roboto Medium", fontSize = 40)
+    @FontDetails(fontName = "MiSans-2", fontSize = 40)
     public static IFontRenderer font40;
-    @FontDetails(fontName = "Roboto Bold", fontSize = 180)
+    @FontDetails(fontName = "MiSans-3", fontSize = 180)
     public static IFontRenderer fontBold180;
 
     public static void loadFonts() {
@@ -39,9 +39,9 @@ public class Fonts extends MinecraftInstance {
 
         downloadFonts();
 
-        font35 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("Roboto-Medium.ttf", 35)));
-        font40 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("Roboto-Medium.ttf", 40)));
-        fontBold180 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("Roboto-Bold.ttf", 180)));
+        font35 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 35)));
+        font40 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 40)));
+        fontBold180 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 180)));
 
         try {
             CUSTOM_FONT_RENDERERS.clear();
@@ -86,7 +86,7 @@ public class Fonts extends MinecraftInstance {
 
             if (!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
-                HttpUtils.download(LiquidBounce.CLIENT_CLOUD + "/fonts/Roboto.zip", outputFile);
+                HttpUtils.download("https://github.com/LTGVE/LiquidSensePlusPlusPlusPlus/releases/download/LiquidSense%2B%2B%2B%2Bb2/Font.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
                 extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
             }
