@@ -11,6 +11,8 @@ import net.ccbluex.liquidbounce.api.minecraft.client.gui.IFontRenderer;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.MinecraftInstance;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 import java.io.*;
@@ -37,11 +39,11 @@ public class Fonts extends MinecraftInstance {
 
         ClientUtils.getLogger().info("Loading Fonts.");
 
-        downloadFonts();
+        //downloadFonts();
 
-        font35 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 35)));
-        font40 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 40)));
-        fontBold180 = classProvider.wrapFontRenderer(new GameFontRenderer(getFont("misans.ttf", 180)));
+        font35 = classProvider.wrapFontRenderer(new GameFontRenderer(getFonts("misans", 35)));
+        font40 = classProvider.wrapFontRenderer(new GameFontRenderer(getFonts("misans", 40)));
+        fontBold180 = classProvider.wrapFontRenderer(new GameFontRenderer(getFonts("misans", 180)));
 
         try {
             CUSTOM_FONT_RENDERERS.clear();
@@ -139,6 +141,19 @@ public class Fonts extends MinecraftInstance {
         }
 
         return null;
+    }
+    private static Font getFonts(String name,int size) {
+        Font font;
+        try {
+            InputStream is = Minecraft.getMinecraft().getResourceManager().getResource(new ResourceLocation("font/"+name+".ttf")).getInputStream();
+            font = Font.createFont(0, is);
+            font = font.deriveFont(0, size);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.out.println("Error loading font");
+            font = new Font("default", 0, size);
+        }
+        return font;
     }
 
     public static List<IFontRenderer> getFonts() {

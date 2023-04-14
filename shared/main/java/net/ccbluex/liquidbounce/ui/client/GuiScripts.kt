@@ -63,7 +63,8 @@ class GuiScripts(private val prevGui: IGuiScreen) : WrappedGuiScreen() {
                 if (fileName.endsWith(".js")) {
                     LiquidBounce.scriptManager.importScript(file)
 
-                    LiquidBounce.clickGui = ClickGui()
+                    LiquidBounce.clickGui =
+                        ClickGui()
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.clickGuiConfig)
                     return
                 } else if (fileName.endsWith(".zip")) {
@@ -94,7 +95,8 @@ class GuiScripts(private val prevGui: IGuiScreen) : WrappedGuiScreen() {
 
                     scriptFiles.forEach { scriptFile -> LiquidBounce.scriptManager.loadScript(scriptFile) }
 
-                    LiquidBounce.clickGui = ClickGui()
+                    LiquidBounce.clickGui =
+                        ClickGui()
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.clickGuiConfig)
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.hudConfig)
                     return
@@ -112,7 +114,8 @@ class GuiScripts(private val prevGui: IGuiScreen) : WrappedGuiScreen() {
 
                     LiquidBounce.scriptManager.deleteScript(script)
 
-                    LiquidBounce.clickGui = ClickGui()
+                    LiquidBounce.clickGui =
+                        ClickGui()
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.clickGuiConfig)
                     LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.hudConfig)
                 }

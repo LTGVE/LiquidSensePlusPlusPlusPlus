@@ -20,9 +20,13 @@ import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
 import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
 import net.ccbluex.liquidbounce.utils.EntityUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,7 @@ public class ClickGui extends WrappedGuiScreen {
     private Panel clickedPanel;
     private int mouseX;
     private int mouseY;
-
+    private int scroll;
     public ClickGui() {
         final int width = 100;
         final int height = 18;
@@ -197,14 +201,15 @@ public class ClickGui extends WrappedGuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        if (Mouse.isButtonDown(0) && mouseX >= 5 && mouseX <= 50 && mouseY <= representedScreen.getHeight() - 5 && mouseY >= representedScreen.getHeight() - 50)
-            mc.displayGuiScreen(classProvider.wrapGuiScreen(new GuiHudDesigner()));
 
         // Enable DisplayList optimization
         AWTFontRenderer.Companion.setAssumeNonVolatile(true);
 
         final double scale = ((ClickGUI) Objects.requireNonNull(LiquidBounce.moduleManager.getModule(ClickGUI.class))).scaleValue.get();
 
+        GlStateManager.translate(0,scroll,0);
+
+        mouseY-=scroll;
         mouseX /= scale;
         mouseY /= scale;
 
@@ -213,8 +218,12 @@ public class ClickGui extends WrappedGuiScreen {
 
         representedScreen.drawDefaultBackground();
 
-        RenderUtils.drawImage(hudIcon, 9, representedScreen.getHeight() - 41, 32, 32);
+        ScaledResolution sr = new ScaledResolution(Minecraft.getMinecraft());
 
+
+
+        if (Mouse.isButtonDown(0) && mouseX >= 5 && mouseX <= 50 && mouseY <= representedScreen.getHeight() - 5 && mouseY >= representedScreen.getHeight() - 50)
+            mc.displayGuiScreen(classProvider.wrapGuiScreen(new GuiHudDesigner()));
         GL11.glScaled(scale, scale, scale);
 
         for (final Panel panel : panels) {
@@ -233,20 +242,44 @@ public class ClickGui extends WrappedGuiScreen {
             }
         }
 
+
+
+        //RenderUtils.drawRect(0,sr.getScaledHeight(),sr.getScaledWidth(),sr.getScaledHeight()-scroll,-804253680);
+
+        RenderUtils.drawImage(hudIcon, 9, representedScreen.getHeight() - 41, 32, 32);
+
+        classProvider.getGlStateManager().disableLighting();
+        functions.disableStandardItemLighting();
+        GL11.glScaled(1, 1, 1);
         if (Mouse.hasWheel()) {
             int wheel = Mouse.getDWheel();
 
             for (int i = panels.size() - 1; i >= 0; i--)
                 if (panels.get(i).handleScroll(mouseX, mouseY, wheel))
-                    break;
+                    return;
+            if(wheel<0){
+                scroll-=15;
+            }else if(wheel>0){
+                scroll+=15;
+                if(scroll>0){
+                    scroll=0;
+                }
+            }
         }
-
-        classProvider.getGlStateManager().disableLighting();
-        functions.disableStandardItemLighting();
-        GL11.glScaled(1, 1, 1);
-
         AWTFontRenderer.Companion.setAssumeNonVolatile(false);
+        if (Mouse.hasWheel()) {
+            int wheel = Mouse.getDWheel();
 
+            for (int i = panels.size() - 1; i >= 0; i--)
+                if (panels.get(i).handleScroll(mouseX, mouseY, wheel))
+                    return;
+            if(wheel<0){
+                scroll-=15;
+            }else if(wheel>0){
+                scroll+=15;
+                if(scroll>0) scroll=0;
+            }
+        }
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -254,6 +287,7 @@ public class ClickGui extends WrappedGuiScreen {
     public void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         final double scale = ((ClickGUI) Objects.requireNonNull(LiquidBounce.moduleManager.getModule(ClickGUI.class))).scaleValue.get();
 
+        mouseY-=scroll;
         mouseX /= scale;
         mouseY /= scale;
 
@@ -282,7 +316,7 @@ public class ClickGui extends WrappedGuiScreen {
     @Override
     public void mouseReleased(int mouseX, int mouseY, int state) {
         final double scale = ((ClickGUI) Objects.requireNonNull(LiquidBounce.moduleManager.getModule(ClickGUI.class))).scaleValue.get();
-
+        mouseY-=scroll;
         mouseX /= scale;
         mouseY /= scale;
 
